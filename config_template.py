@@ -11,3 +11,5 @@ SUBJECT_TEMPLATE = "Versäumter Unttericht {langname}"
 
 BODY_TEMPLATE = """{langname} hat gefehlt am {beginndatum} {beginnzeit} bis {enddatum} {endzeit}
 """
+
+TOLERIERTE_VERSPAETUNG_MINUTEN = 30
