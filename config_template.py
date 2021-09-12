@@ -9,7 +9,7 @@ AUSBILDER = {
     }
 }
 
-SUBJECT_TEMPLATE = "Versäumter Unttericht {langname}"
+SUBJECT_TEMPLATE = "Versäumter Untericht {langname}"
 
 BODY_TEMPLATE = """{langname} hat gefehlt am {beginndatum} {beginnzeit} bis {enddatum} {endzeit}
 """
