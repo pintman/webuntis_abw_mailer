@@ -2,6 +2,7 @@ import webbrowser
 import csv
 import configparser
 import datetime
+import urllib.parse
 
 # Langname	Vorname	ID	Klasse	Beginndatum	Beginnzeit	Enddatum	Endzeit	Unterbrechungen	Abwesenheitsgrund	Text/Grund	Entschuldigungsnummer	Status	Entschuldigungstext	gemeldet von Schüler*in
 URL_TEMPLATE = "mailto:{to}?subject={subject}&body={body}"
@@ -19,7 +20,10 @@ def read_absences(filename:str):
 
 def send_mail(to, subject, body):
     webbrowser.open(
-        URL_TEMPLATE.format(to=to, subject=subject, body=body)
+        URL_TEMPLATE.format(
+            to=to, 
+            subject=urllib.parse.quote(subject), 
+            body=urllib.parse.quote(body))
     )
 
 def main():
