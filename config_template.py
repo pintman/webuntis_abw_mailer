@@ -1,5 +1,7 @@
 # copy this file to config.py and fill out
 
+CSV_FILE = "AbsenceList.csv"
+
 AUSBILDER = {
     'ITF19a': {
         'Schmitz': 'meier@example.org',

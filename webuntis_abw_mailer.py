@@ -3,17 +3,15 @@ import csv
 import config
 import datetime
 
-CSV_FILE = "AbsenceList.csv"
 # Langname	Vorname	ID	Klasse	Beginndatum	Beginnzeit	Enddatum	Endzeit	Unterbrechungen	Abwesenheitsgrund	Text/Grund	Entschuldigungsnummer	Status	Entschuldigungstext	gemeldet von Schüler*in
 URL_TEMPLATE = "mailto:{to}?subject={subject}&body={body}"
 
 def read_absences(filename:str):
     csv.register_dialect('untis', delimiter='\t')
-    with open(CSV_FILE, newline='') as csvfile:
+    with open(filename, newline='') as csvfile:
         reader = csv.DictReader(csvfile, dialect='untis')
         for row in reader:
             yield row
-               
 
 def send_mail(to, subject, body):
     webbrowser.open(
@@ -21,7 +19,7 @@ def send_mail(to, subject, body):
     )
 
 def main():
-    for row in read_absences(CSV_FILE):
+    for row in read_absences(config.CSV_FILE):
         klasse = row['Klasse']
         if klasse not in config.AUSBILDER:
             continue
