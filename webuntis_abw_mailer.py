@@ -47,7 +47,7 @@ def main():
         if b_dat  == e_dat:
             minutes_late = time_delta_minutes(b_zeit, e_zeit)
             tolerable_late_minutes = int(config['DEFAULT']['TOLERIERTE_VERSPAETUNG_MINUTEN'])
-            if minutes_late < tolerable_late_minutes:
+            if minutes_late <= tolerable_late_minutes:
                 print(f'Tolerierte Abwesenheit: {name} ({klasse}) {b_dat}: {b_zeit} - {e_zeit}')
                 continue
 
