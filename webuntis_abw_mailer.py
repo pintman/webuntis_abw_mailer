@@ -61,10 +61,10 @@ def main():
             continue
         ausbildermail = config[ausbilder_key][name]
         subject = config['Template']['SUBJECT'].format(langname=name)
-        print('Sende Verspätung für', name, 'an', ausbildermail)
-        send_mail(ausbildermail, subject, body)
+        print(f'Sende Verspätung für {name} ({klasse}) an {ausbildermail}: {b_dat} {b_zeit} - {e_dat} {e_zeit} | {row["Text/Grund"]}')
 
-        input("Enter for next mail")
+        if input('j/n? ').lower() == 'j':
+            send_mail(ausbildermail, subject, body)
 
 if __name__ == '__main__':
     main()
