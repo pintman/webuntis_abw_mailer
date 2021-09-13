@@ -2,3 +2,7 @@ AbsenceList.csv
 config.ini
 .vscode/
 __pycache__/
+venv/ 
+dist/
+build/
+
