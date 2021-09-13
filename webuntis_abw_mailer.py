@@ -3,9 +3,10 @@ import csv
 import configparser
 import datetime
 import urllib.parse
+import os
 
 URL_TEMPLATE = "mailto:{to}?subject={subject}&body={body}"
-CONFIG_FILE = 'config.ini'
+CONFIG_FILE = os.path.join(os.path.dirname(__file__), 'config.ini')
 
 config = configparser.ConfigParser()
 config.read(CONFIG_FILE)
