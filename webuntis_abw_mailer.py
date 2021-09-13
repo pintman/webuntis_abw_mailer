@@ -69,7 +69,7 @@ def main():
             send_mail(ausbildermail, subject, body)
 
 def ask_ausbildermail(name, ausbilder_key: str):
-    mail = input('Email Ausbilder*in ')
+    mail = input('Email Ausbilder*in > ')
     config[ausbilder_key][name] = mail
     with open(CONFIG_FILE, 'w') as f:
         config.write(f) 
