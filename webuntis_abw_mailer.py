@@ -5,9 +5,10 @@ import datetime
 import urllib.parse
 
 URL_TEMPLATE = "mailto:{to}?subject={subject}&body={body}"
+CONFIG_FILE = 'config.ini'
 
 config = configparser.ConfigParser()
-config.read('config.ini')
+config.read(CONFIG_FILE)
 
 
 def read_absences(filename:str):
@@ -34,7 +35,7 @@ def time_delta_minutes(t1, t2):
     return delta.total_seconds() / 60
 
 def main():
-    for row in read_absences(config['DEFAULT']['CSV_FILE']):
+    for row in read_absences(config['DEFAULT']['csv_file']):
         klasse = row['Klasse']
         ausbilder_key = 'Ausbilder.' + klasse
         if ausbilder_key not in config:
@@ -46,25 +47,33 @@ def main():
         name = row['Langname']        
         if b_dat  == e_dat:
             minutes_late = time_delta_minutes(b_zeit, e_zeit)
-            tolerable_late_minutes = int(config['DEFAULT']['TOLERIERTE_VERSPAETUNG_MINUTEN'])
+            tolerable_late_minutes = int(config['DEFAULT']['tolerierte_verspaetung_minuten'])
             if minutes_late <= tolerable_late_minutes:
                 print(f'Tolerierte Abwesenheit: {name} ({klasse}) {b_dat}: {b_zeit} - {e_zeit}')
                 continue
 
-        body = config['Template']['BODY'].format(
+        body = config['Template']['body'].format(
             langname=name,
             beginndatum=b_dat, beginnzeit=b_zeit,
             enddatum=e_dat, endzeit=e_zeit
         )
         if name not in config[ausbilder_key]:
             print(f'Keine Ausbildermail für {name} ({klasse})')
-            continue
-        ausbildermail = config[ausbilder_key][name]
-        subject = config['Template']['SUBJECT'].format(langname=name)
+            ausbildermail = ask_ausbildermail(name, ausbilder_key)
+        else:
+            ausbildermail = config[ausbilder_key][name]
+        subject = config['Template']['subject'].format(langname=name)
         print(f'Sende Verspätung für {name} ({klasse}) an {ausbildermail}: {b_dat} {b_zeit} - {e_dat} {e_zeit} | {row["Text/Grund"]}')
 
         if input('j/n? ').lower() == 'j':
             send_mail(ausbildermail, subject, body)
+
+def ask_ausbildermail(name, ausbilder_key: str):
+    mail = input('Email Ausbilder*in ')
+    config[ausbilder_key][name] = mail
+    with open(CONFIG_FILE, 'w') as f:
+        config.write(f) 
+    return mail
 
 if __name__ == '__main__':
     main()
