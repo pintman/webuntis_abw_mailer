@@ -63,7 +63,7 @@ def main():
             ausbildermail = ask_ausbildermail(name, ausbilder_key)
         else:
             ausbildermail = config[ausbilder_key][name]
-        subject = config['Template']['subject'].format(langname=name)
+        subject = config['Template']['subject'].format(langname=name, klasse=klasse)
         print(f'Sende Verspätung für {name} ({klasse}) an {ausbildermail}: {b_dat} {b_zeit} - {e_dat} {e_zeit} | {row["Text/Grund"]}')
 
         if input('j/n? ').lower() == 'j':
