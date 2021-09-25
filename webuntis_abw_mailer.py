@@ -39,10 +39,13 @@ def main():
     if input('Abwesenheiten herunterladen? j/n ') == 'j':
         webbrowser.open(f'https://{config["DEFAULT"]["webuntis_server"]}.webuntis.com/absences')
         return
+    ignore_entries_with_reason = input('Einträge mit Text/Grund ignorieren? j/n ') == 'j'
     for row in read_absences(config['DEFAULT']['csv_file']):
         klasse = row['Klasse']
         ausbilder_key = 'Ausbilder.' + klasse
         if ausbilder_key not in config:
+            continue
+        if ignore_entries_with_reason and row['Text/Grund']:
             continue
 
         b_dat, b_zeit = row['Beginndatum'], row['Beginnzeit']
