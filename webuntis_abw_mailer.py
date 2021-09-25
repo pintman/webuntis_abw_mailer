@@ -45,7 +45,7 @@ def main():
         ausbilder_key = 'Ausbilder.' + klasse
         if ausbilder_key not in config:
             continue
-        if ignore_entries_with_reason and row['Text/Grund']:
+        if ignore_entries_with_reason and row['Text/Grund'] != '':
             continue
 
         b_dat, b_zeit = row['Beginndatum'], row['Beginnzeit']
