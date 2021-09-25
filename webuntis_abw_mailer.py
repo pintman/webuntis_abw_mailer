@@ -36,6 +36,9 @@ def time_delta_minutes(t1, t2):
     return delta.total_seconds() / 60
 
 def main():
+    if input('Abwesenheiten herunterladen? j/n ') == 'j':
+        webbrowser.open(f'https://{config["DEFAULT"]["webuntis_server"]}.webuntis.com/absences')
+        return
     for row in read_absences(config['DEFAULT']['csv_file']):
         klasse = row['Klasse']
         ausbilder_key = 'Ausbilder.' + klasse
