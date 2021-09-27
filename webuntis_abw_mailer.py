@@ -38,7 +38,8 @@ def time_delta_minutes(t1, t2):
 def main():
     if input('Abwesenheiten herunterladen? j/n ') == 'j':
         webbrowser.open(f'https://{config["DEFAULT"]["webuntis_server"]}.webuntis.com/absences')
-        return
+        input('Weiter mit Enter')
+
     ignore_entries_with_reason = input('Einträge mit Text/Grund ignorieren? j/n ') == 'j'
     for row in read_absences(config['DEFAULT']['csv_file']):
         klasse = row['Klasse']
