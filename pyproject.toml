@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "webuntis_abw_mailer"
+version = "0.1.0"
+description = "Mailer für Abwesenheiten aus Webuntis"
+authors = ["Pintman <pintman@0xabc.de>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[tool.poetry.dev-dependencies]
+pylint = "^2.11.1"
+pytest = "^6.2.5"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
